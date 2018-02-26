@@ -611,11 +611,18 @@ int ipa3_qmi_filter_request_send(struct ipa_install_fltr_rule_req_msg_v01 *req)
 
 	mutex_lock(&ipa3_qmi_lock);
 	if (ipa3_qmi_ctx != NULL) {
+<<<<<<< HEAD
 		/* cache the qmi_filter_request */
 		memcpy(&(ipa3_qmi_ctx->ipa_install_fltr_rule_req_msg_cache[
 			ipa3_qmi_ctx->num_ipa_install_fltr_rule_req_msg]),
 			req,
 			sizeof(struct ipa_install_fltr_rule_req_msg_v01));
+=======
+		memcpy(&(ipa3_qmi_ctx->ipa_install_fltr_rule_req_msg_cache[
+				ipa3_qmi_ctx->num_ipa_install_fltr_rule_req_msg]),
+				req,
+				sizeof(struct ipa_install_fltr_rule_req_msg_v01));
+>>>>>>> 09baf1a... Kernel: Xiaomi kernel changes for Redmi 4/4X
 		ipa3_qmi_ctx->num_ipa_install_fltr_rule_req_msg++;
 		ipa3_qmi_ctx->num_ipa_install_fltr_rule_req_msg %= 10;
 	}
@@ -641,6 +648,7 @@ int ipa3_qmi_filter_request_send(struct ipa_install_fltr_rule_req_msg_v01 *req)
 		resp.resp.error, "ipa_install_filter");
 }
 
+<<<<<<< HEAD
 /* sending filter-install-request to modem*/
 int ipa3_qmi_filter_request_ex_send(
 	struct ipa_install_fltr_rule_req_ex_msg_v01 *req)
@@ -747,6 +755,8 @@ int ipa3_qmi_ul_filter_request_send(
 		resp.resp.error, "ipa_received_ul_firewall_filter");
 }
 
+=======
+>>>>>>> 09baf1a... Kernel: Xiaomi kernel changes for Redmi 4/4X
 int ipa3_qmi_enable_force_clear_datapath_send(
 	struct ipa_enable_force_clear_datapath_req_msg_v01 *req)
 {
@@ -855,6 +865,7 @@ int ipa3_qmi_filter_notify_send(
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 	if (req->source_pipe_index == -1) {
 		IPAWANERR("Source pipe index invalid\n");
 		return -EINVAL;
@@ -867,6 +878,14 @@ int ipa3_qmi_filter_notify_send(
 			ipa3_qmi_ctx->num_ipa_fltr_installed_notif_req_msg]),
 			req,
 			sizeof(struct ipa_fltr_installed_notif_req_msg_v01));
+=======
+	mutex_lock(&ipa3_qmi_lock);
+	if (ipa3_qmi_ctx != NULL) {
+		memcpy(&(ipa3_qmi_ctx->ipa_fltr_installed_notif_req_msg_cache[
+				ipa3_qmi_ctx->num_ipa_fltr_installed_notif_req_msg]),
+				req,
+				sizeof(struct ipa_fltr_installed_notif_req_msg_v01));
+>>>>>>> 09baf1a... Kernel: Xiaomi kernel changes for Redmi 4/4X
 		ipa3_qmi_ctx->num_ipa_fltr_installed_notif_req_msg++;
 		ipa3_qmi_ctx->num_ipa_fltr_installed_notif_req_msg %= 10;
 	}
@@ -1433,6 +1452,7 @@ int ipa3_qmi_stop_data_qouta(void)
 		resp.resp.error, "ipa_stop_data_usage_quota_req_msg_v01");
 }
 
+<<<<<<< HEAD
 int ipa3_qmi_enable_per_client_stats(
 	struct ipa_enable_per_client_stats_req_msg_v01 *req,
 	struct ipa_enable_per_client_stats_resp_msg_v01 *resp)
@@ -1501,6 +1521,8 @@ int ipa3_qmi_get_per_client_packet_stats(
 		"struct ipa_get_stats_per_client_req_msg_v01");
 }
 
+=======
+>>>>>>> 09baf1a... Kernel: Xiaomi kernel changes for Redmi 4/4X
 void ipa3_qmi_init(void)
 {
 	mutex_init(&ipa3_qmi_lock);
